@@ -1,37 +1,38 @@
 package com.mt.springmongo;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
-/**
- * Controller which handles reqest for saving {@link User}s.
- *
- * @author Mithun
- */
+import java.util.List;
+
 @Controller
 public class UserController {
-    private final UserRepository userRepository;
-    
-    private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    public UserController(final UserRepository userRepository) {
-        this.userRepository = userRepository;
+    private UserRepository userRepository;
+
+    @GetMapping("/users")
+    public ModelAndView getAllUsers() {
+        List<User> users = userRepository.findAll();
+        ModelAndView mav = new ModelAndView("users");
+        mav.addObject("users", users);
+        return mav;
     }
 
-    @PostMapping(value = "/save")
-    public String save(@RequestParam("firstName") String firstName,
-                       @RequestParam("lastName") String lastName,
-                       @RequestParam("email") String email) {
+    @GetMapping("/addUser")
+    public String showAddUserForm() {
+        return "input";
+    }
 
-    	logger.info("Creating user name: "+firstName);
+    @PostMapping("/addUser")
+    public String addUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email) {
         User user = new User(firstName, lastName, email);
         userRepository.save(user);
-
-        return "redirect:/";
+        return "redirect:/users";
     }
 }
+
