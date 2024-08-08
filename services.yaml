@@ -14,10 +14,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mongosvc 
+  name: mongosvc
+  namespace: prac-ns 
 spec:
   selector:
-    app: mongodb
+    app: mongodb 
   ports:
   - port: 27017
     targetPort: 27017
