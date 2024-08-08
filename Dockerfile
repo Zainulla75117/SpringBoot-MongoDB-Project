@@ -8,7 +8,7 @@ ENV PROJECT_HOME /opt/app
 
 COPY target/spring-boot-mongo-1.0.jar $PROJECT_HOME/spring-boot-mongo.jar
 
-COPY src/main/resources/static/ $PROJECT_HOME/static/
+COPY src/main/resources/templates/mithunlogo.jpg $PROJECT_HOME/templates/mithunlogo.jpg
 
 WORKDIR $PROJECT_HOME
 
