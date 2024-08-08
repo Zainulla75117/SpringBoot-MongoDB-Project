@@ -32,12 +32,16 @@
     </nav>
 
     <div class="container mt-5">
-        <div class="jumbotron">
+        <div class="jumbotron text-center">
             <h1 class="display-4">Welcome to the Spring Boot Mongo App</h1>
             <p class="lead">This is a simple web application demonstrating a Spring Boot application with MongoDB.</p>
             <hr class="my-4">
-            <p>Click the button below to manage users.</p>
-            <a class="btn btn-primary btn-lg" href="/usersAndAdd" role="button">Manage Users</a>
+            <p>Click the button below to manage users or add a new one.</p>
+            <!-- Button Group for Center Alignment -->
+            <div class="btn-group" role="group" aria-label="Manage and Add Users">
+                <a class="btn btn-primary btn-lg" href="/usersAndAdd" role="button">Manage Users</a>
+                <a class="btn btn-secondary btn-lg" href="/usersAndAdd" role="button">Users & Add</a>
+            </div>
         </div>
     </div>
 
