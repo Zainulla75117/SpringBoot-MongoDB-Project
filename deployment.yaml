@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: springappsvc
+  namespace: prac-ns
 spec:
   type: NodePort
   selector:
@@ -37,8 +38,8 @@ spec:
           value: "0000"
         resources:
           requests:
-            memory: "128mi"
-            cpu: "1m"
+            memory: "128Mi"
+            cpu: "100m"
           limits:
             memory: "512Mi"
             cpu: "1"
@@ -49,11 +50,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mongosvc
+  namespace: prac-ns
 spec:
   selector:
     app: mongodb
   ports:
-  - port: 80
+  - port: 27017
     targetPort: 27017
 
 ---
@@ -67,12 +69,10 @@ spec:
   selector:
     matchLabels:
       app: mongodb
-      namespace: prac-ns
   template:
     metadata:
       labels:
         app: mongodb
-        namespace: prac-ns
     spec:
       containers:
       - name: mongodb
