@@ -29,16 +29,17 @@ stages{
     }
     stage('K8s Deploy'){
         steps{
-            script {
-                    withCredentials([file(credentialsId: 'Kubernetes-Secret', variable: 'KUBECONFIG')]) {
-                        sh '''
-                        kubectl --kubeconfig=$KUBECONFIG apply -f deployment.yaml
-                        kubectl --kubeconfig=$KUBECONFIG apply -f services.yaml
-                        '''
+            sh "kubectl apply -f deployment.yaml"
+            sh "kubectl apply -f services.yaml"
         }
     }
+    stage('Know Details'){
+        steps{
+            sh "kubectl get all -o wide -n prac-ns"
         }
     }
+        
+    
 
 }//stages
 

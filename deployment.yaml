@@ -42,13 +42,11 @@ spec:
       app: mongodb
       namespace: prac-ns
   template:
-    replicas: 1
     metadata:
       labels:
         app: mongodb
         namespace: prac-ns
     spec:
-      replicas: 1
       containers:
       - name: mongodb
         image: mongo
