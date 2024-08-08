@@ -10,5 +10,10 @@ spring:
       database: users
       authentication-database: admin
 
+  mvc:
+    static-path-pattern: /resources/**
+  resources:
+    static-locations: classpath:/templates/
+
 server:
   port: 8080
