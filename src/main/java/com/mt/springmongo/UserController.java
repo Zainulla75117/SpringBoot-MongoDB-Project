@@ -2,10 +2,10 @@ package com.mt.springmongo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -15,24 +15,19 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("/users")
-    public ModelAndView getAllUsers() {
+    @GetMapping("/usersAndAdd")
+    public String showUsersAndAddForm(Model model) {
         List<User> users = userRepository.findAll();
-        ModelAndView mav = new ModelAndView("users");
-        mav.addObject("users", users);
-        return mav;
+        model.addAttribute("users", users);
+        return "usersAndAdd";
     }
 
-    @GetMapping("/addUser")
-    public String showAddUserForm() {
-        return "input";
-    }
-
-    @PostMapping("/addUser")
-    public String addUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email) {
+    @PostMapping("/usersAndAdd")
+    public String addUser(@RequestParam String firstName, @RequestParam String lastName, @RequestParam String email, Model model) {
         User user = new User(firstName, lastName, email);
         userRepository.save(user);
-        return "redirect:/users";
+        List<User> users = userRepository.findAll();
+        model.addAttribute("users", users);
+        return "usersAndAdd";
     }
 }
-
