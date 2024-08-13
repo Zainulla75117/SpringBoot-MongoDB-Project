@@ -24,7 +24,7 @@ stages{
     }
     stage('DockerPush'){
         steps{
-            sh "docker push zain75117/springupdate"
+            sh "docker push zain75117/springupdate:${env.BUILD_NUMBER}"
         }
     }
     stage('K8s Deploy'){
