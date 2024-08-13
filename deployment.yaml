@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: springapp 
-        image: zain75117/springupdate:${env.BUILD_NUMBER} 
+        image: zain75117/springupdate 
         env: 
         - name: MONGO_DB_HOSTNAME
           value: "mongosvc"
