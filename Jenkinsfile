@@ -19,7 +19,7 @@ stages{
     }
     stage('DockerBuild'){
         steps{
-            sh "docker build -t zain75117/springupdate ."
+            sh "docker build -t zain75117/springupdate:${env.BUILD_NUMBER} ."
         }
     }
     stage('DockerPush'){
