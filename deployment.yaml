@@ -58,7 +58,7 @@ spec:
           value: "0000"
         volumeMounts:
         - name: mongovol
-          path: /data/db
+          mountPath: /data/db
         ports:
         - containerPort: 27017
       volumes:
