@@ -56,6 +56,15 @@ spec:
           value: "mongodb"
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: "0000"
+        volumeMount:
+        - name: mongovol
+          path: /data/db
         ports:
         - containerPort: 27017
+      volumes:
+      - name: mongovol
+        persistentVolumeClaim:
+          claimName: mongopvc
+        
+        
 
