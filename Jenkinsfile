@@ -29,7 +29,7 @@ stages{
     }
     stage('K8s Deploy'){
         steps{
-            sh "sed -i 's|zain75117/springupdate:.*|zain75117/springupdate:${BUILD_NUMBER}| deployment.yaml'"
+            sh "sed -i 's|zain75117/springupdate:.*|zain75117/springupdate:${BUILD_NUMBER}|' deployment.yaml"
             sh "kubectl apply -f deployment.yaml"
             sh "kubectl apply -f services.yaml"
         }
