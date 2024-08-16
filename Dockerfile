@@ -8,8 +8,6 @@ ENV PROJECT_HOME /opt/app
 
 COPY target/spring-boot-mongo-1.0.jar $PROJECT_HOME/spring-boot-mongo.jar
 
-COPY src/main/resources/static/ $PROJECT_HOME/static/
-
 WORKDIR $PROJECT_HOME
 
 EXPOSE 8080
