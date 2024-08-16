@@ -87,16 +87,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Thymeleaf for serving HTML templates -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-
         <!-- WebJars Locator -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator</artifactId>
+            <version>0.34</version> <!-- Add the correct version here -->
         </dependency>
 
     </dependencies>
