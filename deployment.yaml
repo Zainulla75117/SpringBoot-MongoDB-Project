@@ -21,9 +21,15 @@ spec:
         - name: MONGO_DB_HOSTNAME
           value: "mongosvc"
         - name: MONGO_DB_USERNAME
-          value: "mongodb"
+          valueFrom: 
+            configMapRefKey:  
+              name: myconfigmap
+              key: username
         - name: MONGO_DB_PASSWORD
-          value: "0000"
+          valueFrom:
+            secretRefKey:
+              name: mysecret
+              key: password
         resources:
           requests:
             memory: "128Mi"
@@ -66,7 +72,10 @@ spec:
         image: mongo
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
-          value: "mongodb"
+          valueFrom:
+            configMapRefKey:
+              name: myconfigmap
+              key: username
         - name: MONGO_INITDB_ROOT_PASSWORD
           value: "0000"
         volumeMounts:
