@@ -4,7 +4,7 @@ metadata:
   name: springappsvc
   namespace: prac-ns
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: springapp
   ports:
