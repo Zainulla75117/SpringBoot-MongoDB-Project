@@ -22,12 +22,12 @@ spec:
           value: "mongosvc"
         - name: MONGO_DB_USERNAME
           valueFrom: 
-            configMapRefKey:  
+            configMapKeyRef:  
               name: myconfigmap
               key: username
         - name: MONGO_DB_PASSWORD
           valueFrom:
-            secretRefKey:
+            secretKeyRef:
               name: mysecret
               key: password
         resources:
@@ -73,11 +73,14 @@ spec:
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
           valueFrom:
-            configMapRefKey:
+            configMapKeyRef:
               name: myconfigmap
               key: username
         - name: MONGO_INITDB_ROOT_PASSWORD
-          value: "0000"
+          valueFrom:
+            secretKeyRef:
+              name: mysecret
+              key: password
         volumeMounts:
         - name: pvc
           mountPath: /data/db
