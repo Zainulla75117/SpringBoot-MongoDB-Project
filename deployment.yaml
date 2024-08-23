@@ -30,30 +30,41 @@ spec:
             secretKeyRef:
               name: mysecret
               key: password
+        livenessProbe:
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          timeoutSeconds: 5
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8080
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          timeoutSeconds: 5
         resources:
           requests:
             memory: "128Mi"
             cpu: "100m"
           limits:
             memory: "512Mi"
-            cpu: "1"
+            cpu: "500m"
         ports:
         - containerPort: 8080
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: mongopvc
-  namespace: prac-ns
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 500Mi
----
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: mongopvc
+#  namespace: prac-ns
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 500Mi
+#---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet 
 metadata:
   name: mongodb
   namespace: prac-ns
@@ -81,12 +92,12 @@ spec:
             secretKeyRef:
               name: mysecret
               key: password
-        volumeMounts:
-        - name: pvc
-          mountPath: /data/db
         ports:
         - containerPort: 27017
-      volumes:
-      - name: pvc
-        persistentVolumeClaim:
-          claimName: mongopvc
+        #volumeMounts:
+        #- name: pvc
+        #  mountPath: /data/db
+      #volumes:
+     # - name: pvc
+      #  persistentVolumeClaim:
+      #    claimName: mongopvc
